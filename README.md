@@ -21,4 +21,7 @@ This will tell the wrapper to send the nui message to the Scoreboard iframe.
 
 I am happy to take any optimisations or suggestions for changes to this script. It was made for a custom framework and thought I would release it to help people who might also be having the same issue I had.
 
+# To-Do
+* Create UI → Lua handler
+
 # For Support Please go to our discord https://discord.gg/2hNNkA5t7Z
