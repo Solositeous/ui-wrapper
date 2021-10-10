@@ -4,28 +4,27 @@ $(function () {
 		var data = event.data
 		var skip = false
 		if (data.addon == "ui") {
-			if (data.identifier != null) {
+			if (data.table.identifier != null) {
 				uiList.forEach(function(item, index) {
-					if (data.identifier == item) {
+					if (data.table.identifier == item) {
 						skip = true;
 					}
 				})
 				if (skip) return false;
 				$("<iframe>")
-				.attr("src", "nui://"+data.addonname+"/"+data.htmladd)
-				.attr('name', data.addonname+"/"+data.identifier)
-				.attr('id', data.identifier)
+				.attr("src", "nui://"+data.table.addonname+"/"+data.table.htmladd)
+				.attr('name', data.table.addonname+"/"+data.table.identifier)
+				.attr('id', data.table.identifier)
 				.attr('allow', "microphone *; camera *;")
 				.attr('tabindex', "-1")
 				.attr('style', "visibility: visible; z-index: 0;")
 				.appendTo('.ui-body');
-				uiList.push(data.identifier);
+				uiList.push(data.table.identifier);
 			}
 		} else if (data.addon != null) {
 			$(".ui-body").children("iframe").each(function () {
-				event = JSON.parse(JSON.stringify(event));
 				if (data.addon == $(this).context.id) {
-					$(this).context.contentWindow.postMessage(data, "*");
+					$(this).context.contentWindow.postMessage(data.table, "*");
 				}
 			})
 		}
