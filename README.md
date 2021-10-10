@@ -9,10 +9,16 @@ Inside your addon at the top of the client side script use the below.
 ```
 exports['ui-wrapper']:uiCreateCustom("Scoreboard", "jones-scoreboard", "ui/scoreboard.html") -- first argument is the identifier (this needs to be uniqued), second argument is the addon name so what you put after start in cfg, the third argument is the location inside the addon where the html file is located.
 ```
-With this script you will need to change the SendNUIMessage to include addon = "identifier". For example
+SendNUIMessage has changed. Below will show you a before and after.
 ```
+Change This:
 SendNUIMessage({
-  addon = "Scoreboard",
+  players = 10,
+  playerid = 1,
+})
+
+To This:
+exports['ui-wrapper']:uiSendMessage("Scoreboard", {
   players = 10,
   playerid = 1,
 })
@@ -23,6 +29,5 @@ I am happy to take any optimisations or suggestions for changes to this script. 
 
 # To-Do
 * Create UI → Lua handler
-* Create export to replace SendNUIMessage
 
 # For Support Please go to our discord https://discord.gg/2hNNkA5t7Z
