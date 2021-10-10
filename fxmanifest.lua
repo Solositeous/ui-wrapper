@@ -2,7 +2,7 @@ fx_version 'adamant'
 
 game 'gta5'
 
-version '1'
+version '1.1.0'
 
 ui_page 'index.html'
 
