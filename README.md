@@ -25,6 +25,17 @@ exports['ui-wrapper']:uiSendMessage("Scoreboard", {
 ```
 This will tell the wrapper to send the nui message to the Scoreboard iframe.
 
+Last thing that you need to do to get this working. In your addons fxmanifest.lua make sure to add files {} and inside the {} add all the files that are ui related. Eg.
+```
+files {
+  'ui/scoreboard.html',
+  'ui/js/script.js',
+  'ui/css/style.css',
+  'ui/png/logo.png',
+}
+```
+If you dont add this then the client will be given an empty html file and it wont display anything
+
 I am happy to take any optimisations or suggestions for changes to this script. It was made for a custom framework and thought I would release it to help people who might also be having the same issue I had.
 
 # To-Do
