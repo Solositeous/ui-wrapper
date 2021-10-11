@@ -77,6 +77,10 @@ In this example is 3 addons. 1 being this ui-wrapper and the other 2 are 2 ways 
 
 I am happy to take any optimisations or suggestions for changes to this script. It was made for a custom framework and thought I would release it to help people who might also be having the same issue I had.
 
+# Important
+
+Make sure to restart ui-wrapper if you restart your script
+
 # To-Do
 
 -   Find more bugs
