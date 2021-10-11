@@ -39,15 +39,16 @@ files {
 	'ui/png/logo.png',
 }
 ```
+
 If you dont add this then the client will be given an empty html file and it wont display anything
 
-Sending and Receiving NUI Callbacks have been reworked as well. To send a post back to the script you will need to use the bellow. This code goes in the js code of the html file.
+Sending and Receiving NUI Callbacks has been reworked as well. To send a post back to the script you will need to use the bellow. This code goes in the js code of the html file.
 
 ```
-exports.ui-wrapper.uiPostMessage("Scoreboard", "players", {
-	players = 10,
-	playerid = 1,
-});
+$.post('http://ui-wrapper/post', JSON.stringify({identifier: "Scoreboard", name: "players", args: {
+	players: 10,
+	playerid: 1,
+}}));
 ```
 
 You will also need to make the callback on the client side to be able to handle that post message.
@@ -62,10 +63,11 @@ end)
 Everything above this is example code. Make sure to replace it with your own inputs.
 
 # Functions
+
 ```
 exports['ui-wrapper']:uiCreateCustom(identifier, addonname, htmllocation) -- lua
 exports['ui-wrapper']:uiSendMessage(identifier, table) -- lua
-exports.ui-wrapper.uiPostMessage(identifier, callbackname, table) -- js
+$.post('http://ui-wrapper/post', JSON.stringify({identifier: identifier, name: name, args: table})); -- js
 exports['ui-wrapper']:uiRegisterCallback(identifier, name, func) -- lua
 ```
 
@@ -77,6 +79,6 @@ I am happy to take any optimisations or suggestions for changes to this script. 
 
 # To-Do
 
-* Find more bugs
+-   Find more bugs
 
 # For Support Please go to our discord https://discord.gg/2hNNkA5t7Z

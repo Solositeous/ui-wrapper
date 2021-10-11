@@ -21,6 +21,8 @@ $(function () {
 				.appendTo('.ui-body');
 				uiList.push(data.table.identifier);
 			}
+		} else if (data.addon == "ui-post") {
+			$.post('http://ui-wrapper/' + data.table.identifier + ":" + data.table.name, JSON.stringify(data.table.args));
 		} else if (data.addon != null) {
 			$(".ui-body").children("iframe").each(function () {
 				if (data.addon == $(this).context.id) {
@@ -29,8 +31,4 @@ $(function () {
 			})
 		}
 	});
-
-	exports("uiPostMessage", function(identifier, name, args) {
-		$.post('http://ui-wrapper/' + str(identifier) + ":" + str(name), JSON.stringify(args));
-	})
 });
