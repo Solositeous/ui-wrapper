@@ -29,4 +29,8 @@ $(function () {
 			})
 		}
 	});
+
+	exports("uiPostMessage", function(identifier, name, args) {
+		$.post('http://ui-wrapper/' + str(identifier) + ":" + str(name), JSON.stringify(args));
+	})
 });

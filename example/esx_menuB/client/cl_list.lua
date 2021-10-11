@@ -1,0 +1,69 @@
+Citizen.CreateThread(function()
+	local ESX = exports['es_extended']:getSharedObject()
+	local MenuType    = 'list'
+	local OpenedMenus = {}
+
+	local openMenu = function(namespace, name, data)
+
+		OpenedMenus[namespace .. '_' .. name] = true
+
+		exports['ui-wrapper']:uiSendMessage("ESX Menu List B", {
+			action    = 'openMenu',
+			namespace = namespace,
+			name      = name,
+			data      = data
+		})
+
+		ESX.SetTimeout(200, function()
+			SetNuiFocus(true, true)
+		end)
+
+	end
+
+	local closeMenu = function(namespace, name)
+
+		OpenedMenus[namespace .. '_' .. name] = nil
+		local OpenedMenuCount = 0
+
+		exports['ui-wrapper']:uiSendMessage("ESX Menu List B", {
+			action    = 'closeMenu',
+			namespace = namespace,
+			name      = name,
+			data      = data
+		})
+
+		for k,v in pairs(OpenedMenus) do
+			if v == true then
+				OpenedMenuCount = OpenedMenuCount + 1
+			end
+		end
+
+		if OpenedMenuCount == 0 then
+			SetNuiFocus(false)
+		end
+
+	end
+
+	ESX.UI.Menu.RegisterType(MenuType, openMenu, closeMenu)
+
+	exports['ui-wrapper']:uiRegisterCallback("ESX Menu List B", 'menu_submit', function(data, cb)
+		local menu = ESX.UI.Menu.GetOpened(MenuType, data._namespace, data._name)
+
+		if menu.submit ~= nil then
+			menu.submit(data, menu)
+		end
+
+		cb('OK')
+	end)
+
+	exports['ui-wrapper']:uiRegisterCallback("ESX Menu List B", 'menu_cancel', function(data, cb)
+		local menu = ESX.UI.Menu.GetOpened(MenuType, data._namespace, data._name)
+
+		if menu.cancel ~= nil then
+			menu.cancel(data, menu)
+		end
+
+		cb('OK')
+	end)
+
+end)

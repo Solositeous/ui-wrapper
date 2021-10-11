@@ -17,4 +17,8 @@ exports("uiSendMessage", function(identifier, table)
 		addon = identifier,
 		table = table,
 	})
-end
+end)
+
+exports("uiRegisterCallback", function(identifier, name, func)
+	RegisterNUICallback(identifier..":"..name, func)
+end)
