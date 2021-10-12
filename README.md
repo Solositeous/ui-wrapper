@@ -2,13 +2,13 @@
 
 UI Wrapper for FiveM
 
-No idea if this has been done before or not but I made this script to allow multiple UI's inside one addon
+No idea if this has been done before or not but I made this script to allow multiple UI"s inside one addon
 
 How To Use:
 Inside your addon at the top of the client side script use the below.
 
 ```
-exports['ui-wrapper']:uiCreateCustom("Scoreboard", "jones-scoreboard", "ui/scoreboard.html") -- first argument is the identifier (this needs to be uniqued), second argument is the addon name so what you put after start in cfg, the third argument is the location inside the addon where the html file is located.
+exports["ui-wrapper"]:uiCreateCustom("Scoreboard", "jones-scoreboard", "ui/scoreboard.html") -- first argument is the identifier (this needs to be uniqued), second argument is the addon name so what you put after start in cfg, the third argument is the location inside the addon where the html file is located.
 ```
 
 SendNUIMessage has changed. Below will show you a before and after.
@@ -21,7 +21,7 @@ SendNUIMessage({
 })
 
 To This:
-exports['ui-wrapper']:uiSendMessage("Scoreboard", {
+exports["ui-wrapper"]:uiSendMessage("Scoreboard", {
 	players = 10,
 	playerid = 1,
 })
@@ -29,7 +29,7 @@ exports['ui-wrapper']:uiSendMessage("Scoreboard", {
 
 This will tell the wrapper to send the nui message to the Scoreboard iframe.
 
-Last thing that you need to do to get this working. In your addons fxmanifest.lua make sure to add files {} and inside the {} add all the files that are ui related. Eg.
+In your addons fxmanifest.lua make sure to add files {} and inside the {} add all the files that are ui related. Eg.
 
 ```
 files {
@@ -45,7 +45,7 @@ If you dont add this then the client will be given an empty html file and it won
 Sending and Receiving NUI Callbacks has been reworked as well. To send a post back to the script you will need to use the bellow. This code goes in the js code of the html file.
 
 ```
-$.post('http://ui-wrapper/post', JSON.stringify({identifier: "Scoreboard", name: "players", args: {
+$.post("http://ui-wrapper/post", JSON.stringify({identifier: "Scoreboard", name: "players", args: {
 	players: 10,
 	playerid: 1,
 }}));
@@ -54,21 +54,30 @@ $.post('http://ui-wrapper/post', JSON.stringify({identifier: "Scoreboard", name:
 You will also need to make the callback on the client side to be able to handle that post message.
 
 ```
-exports['ui-wrapper']:uiRegisterCallback("Scoreboard", "players", function(data, cb)
+exports["ui-wrapper"]:uiRegisterCallback("Scoreboard", "players", function(data, cb)
 	print(json.encode(data))
 	cb("received callback")
 end)
 ```
+
+Lastly you will need to replace all SetNuiFocus with the below
+
+```
+exports["ui-wrapper"]:uiSetFocus(true, false)
+```
+
+True enables it. False disables it.
 
 Everything above this is example code. Make sure to replace it with your own inputs.
 
 # Functions
 
 ```
-exports['ui-wrapper']:uiCreateCustom(identifier, addonname, htmllocation) -- lua
-exports['ui-wrapper']:uiSendMessage(identifier, table) -- lua
-$.post('http://ui-wrapper/post', JSON.stringify({identifier: identifier, name: name, args: table})); -- js
-exports['ui-wrapper']:uiRegisterCallback(identifier, name, func) -- lua
+exports["ui-wrapper"]:uiCreateCustom(identifier, addonname, htmllocation) -- lua
+exports["ui-wrapper"]:uiSendMessage(identifier, table) -- lua
+$.post("http://ui-wrapper/post", JSON.stringify({identifier: identifier, name: name, args: table})); -- js
+exports["ui-wrapper"]:uiRegisterCallback(identifier, name, func) -- lua
+exports["ui-wrapper"]:uiSetFocus(keyboard, mouse) -- lua
 ```
 
 # I have now included an example

@@ -37,3 +37,7 @@ RegisterNUICallback("post", function(data)
 		table = data,
 	})
 end)
+
+exports("uiSetFocus", function(keyboard, mouse)
+	SetNuiFocus(keyboard, mouse)
+end)
