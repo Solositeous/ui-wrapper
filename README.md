@@ -45,7 +45,7 @@ If you dont add this then the client will be given an empty html file and it won
 Sending and Receiving NUI Callbacks has been reworked as well. To send a post back to the script you will need to use the bellow. This code goes in the js code of the html file.
 
 ```
-$.post("http://ui-wrapper/post", JSON.stringify({identifier: "Scoreboard", name: "players", args: {
+$.post("https://ui-wrapper/post", JSON.stringify({identifier: "Scoreboard", name: "players", args: {
 	players: 10,
 	playerid: 1,
 }}));
@@ -75,7 +75,7 @@ Everything above this is example code. Make sure to replace it with your own inp
 ```
 exports["ui-wrapper"]:uiCreateCustom(identifier, addonname, htmllocation) -- lua
 exports["ui-wrapper"]:uiSendMessage(identifier, table) -- lua
-$.post("http://ui-wrapper/post", JSON.stringify({identifier: identifier, name: name, args: table})); -- js
+$.post("https://ui-wrapper/post", JSON.stringify({identifier: identifier, name: name, args: table})); -- js
 exports["ui-wrapper"]:uiRegisterCallback(identifier, name, func) -- lua
 exports["ui-wrapper"]:uiSetFocus(keyboard, mouse) -- lua
 ```
