@@ -46,7 +46,7 @@ $(function () {
 				uiList.push(data.table.identifier);
 			}
 		} else if (data.addon == "ui-post") {
-			$.post("https://SSCore/" + data.table.identifier + ":" + data.table.name, JSON.stringify(data.table.args));
+			$.post("https://ui-wrapper/" + data.table.identifier + ":" + data.table.name, JSON.stringify(data.table.args));
 		} else if (data.addon == "ui-focus") {
 			if (data.table.focus) {
 				$("#" + data.table.identifier).attr("style", "z-index: 999;");
